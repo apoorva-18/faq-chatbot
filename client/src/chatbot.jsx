@@ -15,7 +15,7 @@ const Chatbot = () => {
     setInput("");
 
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/ask`, {
+      const res = await axios.post("api/ask", {
         message: input,
       });
 
