@@ -15,7 +15,7 @@ const Chatbot = () => {
     setInput("");
 
     try {
-      const res = await axios.post("api/ask", {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/ask`, {
         message: input,
       });
 
@@ -26,12 +26,30 @@ const Chatbot = () => {
     }
   };
 
+  const sendFeedback = async (text, helpful) => {
+    try {
+      await axios.post(`${import.meta.env.VITE_API_URL}/feedback`, {
+        message: text,
+        helpful: helpful,
+      });
+      console.log("Feedback sent:", { text, helpful });
+    } catch (err) {
+      console.error("Feedback error:", err);
+    }
+  };
+
   return (
     <div className="chatbot-container">
       <div className="chat-box">
         {messages.map((msg, idx) => (
           <div key={idx} className={`msg ${msg.sender}`}>
             {msg.text}
+            {msg.sender === "bot" && (
+              <div className="feedback-buttons">
+                <button onClick={() => sendFeedback(msg.text, true)}>👍</button>
+                <button onClick={() => sendFeedback(msg.text, false)}>👎</button>
+              </div>
+            )}
           </div>
         ))}
       </div>

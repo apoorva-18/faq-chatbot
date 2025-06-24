@@ -53,3 +53,22 @@ button {
   padding: 10px;
   cursor: pointer;
 }
+.feedback-buttons {
+  margin-top: 6px;
+  display: flex;
+  gap: 8px;
+}
+
+.feedback-buttons button {
+  font-size: 14px;
+  padding: 2px 8px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #f1f1f1;
+  transition: background-color 0.3s;
+}
+
+.feedback-buttons button:hover {
+  background-color: #ddd;
+}
